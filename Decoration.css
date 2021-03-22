@@ -1,0 +1,14 @@
+/**
+* Style for the App
+* Simple Calculator stylesheet
+* @sofoste
+ */
+
+.root {
+    /*-fx-background-image: url("Moon.jpg");*/
+
+}
+
+#screen {
+    -fx-font-family: inherit;
+}
