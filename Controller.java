@@ -1,4 +1,5 @@
 package sample.Calculette;
+
 /*
   --------------------------------
   PORTABLE CALCULATOR V1.0
@@ -26,6 +27,7 @@ public class Controller extends Main implements Initializable{
 
     private static final String errorMsg = "ERROR! Couldn't proceed.";
     private static final String errorMsg1 = "ERROR! Unexpected value: ";
+    private static String msg = "WELCOME";
 
     private Float aFloat = 0f;
     private int choice = -1;
@@ -64,7 +66,7 @@ public class Controller extends Main implements Initializable{
     @FXML
     public void performOperation(ActionEvent event){
         if (event.getSource() == ""){
-            screen.setText("SOFOSTE simple CALCULATOR");
+            screen.setText(msg);
         } else if (event.getSource() == num0) {
             screen.setText(screen.getText() + "0");
         } else if (event.getSource() == num1) {
