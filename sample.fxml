@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<!--(c) sofoste 2020-->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.Calculette.Sample"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <Pane prefHeight="521.0" prefWidth="505.0">
+        <TextField fx:id="screen" editable="false" layoutX="31.0" layoutY="20.0" prefHeight="80.0" prefWidth="450.0">
+            <font>
+                <Font name="Consolas" size="20.0" />
+            </font>
+        </TextField>
+        <Button fx:id="num7" layoutX="31.0" layoutY="130.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="7">
+            <font>
+                <Font name="Consolas" size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num8" layoutX="121.0" layoutY="130.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="8">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num9" layoutX="211.0" layoutY="131.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="9">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num4" layoutX="31.0" layoutY="203.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="4">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <!--(c) sofoste 2020-->
+        <Button fx:id="num5" layoutX="121.0" layoutY="203.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="5">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num1" layoutX="31.0" layoutY="276.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="1">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num0" layoutX="31.0" layoutY="348.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num2" layoutX="121.0" layoutY="276.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="2">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num6" layoutX="211.0" layoutY="203.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="6">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="modBtn" layoutX="31.0" layoutY="459.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="\%">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="clearBtn" layoutX="121.0" layoutY="459.0" mnemonicParsing="false" onAction="#clearInput" prefHeight="50.0" prefWidth="80.0" text="CLEAR">
+            <font>
+                <Font name="Consolas" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="resultBtn" layoutX="211.0" layoutY="459.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="=">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="num3" layoutX="213.0" layoutY="276.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="exitBtn" layoutX="401.0" layoutY="459.0" mnemonicParsing="false" onAction="#closeApp" prefHeight="50.0" prefWidth="80.0" text="EXIT">
+            <font>
+                <Font name="Consolas" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="addBtn" layoutX="401.0" layoutY="131.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="+">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="subBtn" layoutX="401.0" layoutY="203.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="-">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="mulBtn" layoutX="401.0" layoutY="276.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="x">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="divBtn" layoutX="401.0" layoutY="348.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text="/">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="dotBtn" layoutX="121.0" layoutY="348.0" mnemonicParsing="false" onAction="#performOperation" prefHeight="50.0" prefWidth="80.0" text=".">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Button>
+        <ProgressBar fx:id="progress" layoutX="31.0" layoutY="419.0" opacity="0.7" prefHeight="18.0" prefWidth="260.0" />
+    </Pane>
+</GridPane>
