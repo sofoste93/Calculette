@@ -21,5 +21,3 @@
 > UserInput via Buttons
 > Display well readable
 >
->
-...
