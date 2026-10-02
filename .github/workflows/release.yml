@@ -1,0 +1,56 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions: {contents: write}
+jobs:
+  package:
+    strategy:
+      matrix:
+        include:
+          - {os: windows-latest, label: Windows-x64, archive: zip, bundle: Calculette}
+          - {os: ubuntu-latest, label: Linux-x64, archive: tar, bundle: Calculette}
+          - {os: macos-15-intel, label: macOS-x64, archive: tar, bundle: Calculette.app}
+          - {os: macos-14, label: macOS-arm64, archive: tar, bundle: Calculette.app}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with: {distribution: temurin, java-version: '17', cache: maven}
+      - run: mvn -B verify
+      - shell: bash
+        run: |
+          mkdir -p dist
+          jpackage --type app-image --name Calculette --app-version 2.0.0 --vendor sofoste93 --input target --main-jar Calculette.jar --main-class com.sofoste.calculette.CalculetteApp --dest dist
+      - name: Sign Windows launcher when configured
+        if: runner.os == 'Windows' && env.CERTIFICATE_BASE64 != ''
+        shell: pwsh
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.WINDOWS_CERTIFICATE_BASE64 }}
+          CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+        run: |
+          [IO.File]::WriteAllBytes("certificate.pfx", [Convert]::FromBase64String($env:CERTIFICATE_BASE64))
+          signtool sign /fd SHA256 /td SHA256 /tr http://timestamp.digicert.com /f certificate.pfx /p $env:CERTIFICATE_PASSWORD dist/Calculette/Calculette.exe
+      - shell: bash
+        run: |
+          if [ "${{ matrix.archive }}" = "zip" ]; then
+            7z a "Calculette-${{ matrix.label }}.zip" "./dist/${{ matrix.bundle }}"
+          else
+            tar -czf "Calculette-${{ matrix.label }}.tar.gz" -C dist "${{ matrix.bundle }}"
+          fi
+      - uses: actions/upload-artifact@v4
+        with: {name: 'Calculette-${{ matrix.label }}', path: 'Calculette-*.*'}
+  publish:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v4
+        with: {path: artifacts, merge-multiple: true}
+      - run: cd artifacts && sha256sum Calculette-* > SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Calculette 2.0.0 · Restored Edition
+          body_path: CHANGELOG.md
+          files: artifacts/*
+
